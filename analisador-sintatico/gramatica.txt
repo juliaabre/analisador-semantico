@@ -1,0 +1,37 @@
+// Gramática LL(1) simplificada para um programa Java (Trabalho 2).
+// Trabalho 3: acrescentados char_lit na regra F (exigido) e o comando while (diferencial).
+// Formato: CABECA -> corpo | corpo ...   (ε representa a cadeia vazia)
+// O primeiro não-terminal definido é o símbolo de partida.
+// A linha %terminais (opcional) fixa a ordem de exibição dos terminais.
+
+// 1. Início do Programa em Java
+PROG -> public class id { public static void id ( ) { CMDS } }
+
+// 2. Comandos do Programa
+CMDS -> CMD CMDS | ε
+CMD -> DECL | ATRIB | IF_STMT | WHILE_STMT
+
+// 3. Declaração Simples de Variáveis
+DECL -> TIPO id ;
+TIPO -> int | float | char
+
+// 4. Atribuição e If-Else Fatorado
+ATRIB -> id = E ;
+IF_STMT -> if ( COND ) { CMDS } SENAO
+SENAO -> else { CMDS } | ε
+
+// 4.1 Laço while (Trabalho 3 - diferencial)
+WHILE_STMT -> while ( COND ) { CMDS }
+
+// 5. Condição Relacional Simples
+COND -> E OP_REL E
+OP_REL -> == | != | < | >
+
+// 6. Expressões Aritméticas
+E -> T E'
+E' -> + T E' | - T E' | ε
+T -> F T'
+T' -> * F T' | / F T' | ε
+F -> ( E ) | id | num | char_lit
+
+%terminais public class static void int float char if else while id num char_lit + - * / = == != < > ( ) { } ;

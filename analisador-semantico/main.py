@@ -6,23 +6,22 @@ BASE_DIR = Path(__file__).resolve().parent
 LEXER_DIR = BASE_DIR.parent / "analisador-lexico"
 PARSER_DIR = BASE_DIR.parent / "analisador-sintatico"
 
-# Integração com o analisador léxico (Trabalho 1) e o sintático LL(1) (Trabalho 2).
 sys.path.insert(1, str(LEXER_DIR))
 sys.path.insert(1, str(PARSER_DIR))
 
 try:
-    from lexer import Lexer  # noqa: E402
-    from grammar import Grammar  # noqa: E402
+    from lexer import Lexer  
+    from grammar import Grammar  
 except ImportError:
     sys.exit(f"ERRO: as pastas {LEXER_DIR.name} e {PARSER_DIR.name} devem estar ao lado desta.")
 
-from ll1 import LL1  # noqa: E402
-from ll1_parser import PredictiveParser  # noqa: E402
-from token_adapter import tokens_to_input  # noqa: E402
-import report  # noqa: E402  (relatórios do Trabalho 2)
+from ll1 import LL1  
+from ll1_parser import PredictiveParser  
+from token_adapter import tokens_to_input  
+import report
 
-from semantic_analyzer import SemanticAnalyzer  # noqa: E402
-import semantic_report  # noqa: E402
+from semantic_analyzer import SemanticAnalyzer  
+import semantic_report  
 
 
 def compile_file(path: str, ll1: LL1, args) -> bool:

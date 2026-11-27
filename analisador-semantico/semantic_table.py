@@ -2,7 +2,6 @@ from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Optional
 
-# Larguras de memória (width) em bytes de cada tipo (Aula 13).
 WIDTHS = {"int": 4, "float": 8, "char": 1}
 
 
@@ -16,16 +15,10 @@ class SemanticSymbol:
 
 
 class SemanticSymbolTable:
-    """Tabela de Símbolos da análise semântica.
-
-    Diferente da tabela do léxico (Trabalho 1), que só conta ocorrências de
-    identificadores, esta guarda as variáveis DECLARADAS com tipo, largura
-    (width) e endereço relativo (offset).
-    """
 
     def __init__(self) -> None:
         self._symbols: OrderedDict[str, SemanticSymbol] = OrderedDict()
-        self.offset = 0  # inicializado em 0 no main
+        self.offset = 0 
 
     def lookup(self, lexema: str) -> Optional[SemanticSymbol]:
         return self._symbols.get(lexema)
@@ -34,7 +27,7 @@ class SemanticSymbolTable:
         width = WIDTHS[tipo]
         symbol = SemanticSymbol(lexema, tipo, width, self.offset, linha)
         self._symbols[lexema] = symbol
-        self.offset += width  # offset = offset + width
+        self.offset += width 
         return symbol
 
     def symbols(self) -> list[SemanticSymbol]:

@@ -4,7 +4,6 @@ from typing import Optional
 
 @dataclass(frozen=True)
 class Quadruple:
-    """Instrução de três endereços representada como quádrupla (op, arg1, arg2, resultado)."""
 
     op: str
     arg1: Optional[str] = None
@@ -23,12 +22,10 @@ class Quadruple:
             return f"{self.resultado} = {self.arg1}"
         if self.op == "float":
             return f"{self.resultado} = float({self.arg1})"
-        # Operador binário aritmético ou relacional.
         return f"{self.resultado} = {self.arg1} {self.op} {self.arg2}"
 
 
 class CodeGenerator:
-    """Guarda o código gerado e cria temporários (t1, t2, ...) e rótulos (L1, L2, ...)."""
 
     def __init__(self) -> None:
         self.quadruplas: list[Quadruple] = []

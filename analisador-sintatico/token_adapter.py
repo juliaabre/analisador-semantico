@@ -5,13 +5,12 @@ from grammar import END
 
 @dataclass(frozen=True)
 class InputSymbol:
-    """Símbolo da entrada do analisador sintático (terminal + dados do token)."""
 
     terminal: str
     lexema: str
     linha: int
     coluna: int
-    tipo_lexico: str = ""   # tipo original do léxico (ex.: INTEGER_LITERAL), usado no semântico
+    tipo_lexico: str = "" 
 
     def descricao(self) -> str:
         if self.terminal == END:

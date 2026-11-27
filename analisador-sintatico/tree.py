@@ -4,12 +4,10 @@ from typing import Optional
 
 @dataclass
 class Node:
-    """Nó da árvore de derivação."""
 
     simbolo: str
     lexema: Optional[str] = None
     filhos: list["Node"] = field(default_factory=list)
-    # Preenchidos quando um terminal é casado (Trabalho 3: usados pelo semântico).
     linha: Optional[int] = None
     coluna: Optional[int] = None
     tipo_lexico: Optional[str] = None
@@ -26,10 +24,8 @@ class Node:
 
 
 def render_tree(raiz: Node) -> list[str]:
-    """Desenha a árvore percorrendo os nós em pré-ordem (raiz, filhos da esquerda para a direita)."""
     linhas = [raiz.rotulo()]
 
-    # Iterativo para não depender do limite de recursão em programas longos.
     pendentes = [(filho, "", i == len(raiz.filhos) - 1) for i, filho in enumerate(raiz.filhos)]
     pendentes.reverse()
 
